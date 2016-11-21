@@ -12,7 +12,8 @@ int Managing::run() {
 }
 
 void Managing::printSuspiciousPairs() {
-  cout << "print" << endl;
+  cout<<"Filepath: "<<masterfilePath<<endl;
+  cout<<"rigor: "<<rigor<<endl;
 }
 
 vector<string> Managing::getMasterVector(string masterfilePath){
