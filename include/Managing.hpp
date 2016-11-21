@@ -19,6 +19,8 @@ private:
   char rigor;
 
 public:
+  Managing(string fpath, char r) : masterfilePath(fpath), rigor(r){}
+  void printSuspiciousPairs(); //prints suspicious pairs
   vector<string> getMasterVector(string masterfilePath); //gets vector of list of files to test
   string getContent(string filePath); //gets content of a file
   void gotcha(string filePathOne, string filePathTwo); //increments suspicious files list
