@@ -14,9 +14,26 @@ void printvector(vector<string> path) {
   }
 }
 
+void checkAll(string* one, string* two, char r){
+  cout<<*one<<endl;
+  cout<*two<<endl;
+  cout<<r<<endl;
+  cout<<"*******************************************"<<endl;
+}
+
 int Managing::run() {
+  string contentOne;
+  string contentTwo;
   vector<string> fileList = getMasterVector(masterfilePath);
-  gotcha(fileList.at(0), fileList.at(1));
+  for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
+    contentOne = getContent(*i);
+    for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
+      contentTwo = getContent(*j);
+      if(checkAll(&contentOne,&contentTwo, rigor)){
+	gotcha(*i,*j);
+      }
+    }
+  }
   return 0;
 }
 
@@ -54,3 +71,4 @@ void Managing::gotcha(string fileOne, string fileTwo){
   string newEntry = fileOne + ", " + fileTwo;
   suspiciousFiles.push_back(newEntry);
 }
+
