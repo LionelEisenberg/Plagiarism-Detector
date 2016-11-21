@@ -16,17 +16,18 @@ int main(int argc, char* argv[]) {
     return 0;
   }
 
-  string filePath = argv[1];
+  string masterfilePath = argv[1];
   if(argc == 3) {
-    char suspicionStrength = argv[2];
+    char rigor = argv[2];
   }
 
   else {
-    char suspicionStrength = 'm';
+    char rigor = 'm';
   }
 
-  Managing m = Managing(filePath, suspiciousStrength);
+  Managing m = Managing(masterfilePath, rigor);
   m.run();
+  m.printSuspiciousPairs();
 
   return 0;
 }
