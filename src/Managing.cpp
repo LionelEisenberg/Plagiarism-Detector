@@ -14,11 +14,12 @@ void printvector(vector<string> path) {
   }
 }
 
-void checkAll(string* one, string* two, char r){
+int checkAll(string* one, string* two, char r){
   cout<<*one<<endl;
-  cout<*two<<endl;
+  cout<<*two<<endl;
   cout<<r<<endl;
   cout<<"*******************************************"<<endl;
+  return 1;
 }
 
 int Managing::run() {
