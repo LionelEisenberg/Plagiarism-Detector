@@ -1,11 +1,11 @@
 #include "../include/Managing.hpp"
 #include <iostream>
 
-int run() {
+int Managing::run() {
   cout << "run" <<endl;
   return 0;
 }
 
-void printSuspiciousPairs() {
+void Managing::printSuspiciousPairs() {
   cout << "print" << endl;
 }
