@@ -17,12 +17,13 @@ int main(int argc, char* argv[]) {
   }
 
   string masterfilePath = argv[1];
+  char rigor;
   if(argc == 3) {
-    char rigor = argv[2];
+    rigor = stoi(argv[2]);
   }
 
   else {
-    char rigor = 'm';
+    rigor = 'm';
   }
 
   Managing m = Managing(masterfilePath, rigor);
