@@ -38,3 +38,14 @@ vector<string> Managing::getMasterVector(string masterfilePath){
   return fileList;
 }
 
+string Managing::getContent(string filepath){
+  string content = "";
+  ifstream inFile;
+  inFile.open(masterfilePath);
+  string data;
+  while(getline(inFile,data)){
+    content += data;
+  }
+  inFile.close();
+  return content;
+}
