@@ -2,12 +2,22 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <iostream>
+#include <fstream>
 #include <cstdio>
 #include <cstdlib>
 
+using namespace std;
+
+void printvector(vector<string> path) {
+  for (vector<string>::const_iterator i = path.begin(); i != path.end(); i++) {
+    cout << *i << endl;
+  }
+}
+
 int Managing::run() {
   cout << "run" <<endl;
+  vector<string> fileList = getMasterVector(masterfilePath);
+  printvector(fileList);
   return 0;
 }
 
@@ -27,3 +37,4 @@ vector<string> Managing::getMasterVector(string masterfilePath){
   inFile.close();
   return fileList;
 }
+
