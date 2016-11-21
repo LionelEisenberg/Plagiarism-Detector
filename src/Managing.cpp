@@ -20,6 +20,9 @@ int Managing::run() {
 }
 
 void Managing::printSuspiciousPairs() {
+  for(vector<string>::iterator i = suspiciousFiles.begin(); i != suspiciousFiles.end(); i++){
+    cout<<*i<<endl;
+  }
 }
 
 vector<string> Managing::getMasterVector(string masterfilePath){
@@ -44,4 +47,9 @@ string Managing::getContent(string filepath){
   }
   inFile.close();
   return content;
+}
+
+void Managing::gotcha(string fileOne, string fileTwo){
+  string newEntry = fileOne + ", " + fileTwo;
+  suspiciousFiles.push_back(newEntry);
 }
