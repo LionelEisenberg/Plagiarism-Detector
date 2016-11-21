@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int main(const int argc, const char* argv[]) {
+int main(int argc, char* argv[]) {
   if(argc != 2 || argc != 3) {
     cout << "ERROR: THe number of supplied arguments is not correct" << endl;
     return 0;
@@ -25,8 +25,8 @@ int main(const int argc, const char* argv[]) {
     char suspicionStrength = 'm';
   }
 
-  Managing M = Managing(filePath, suspiciousStrength);
-  M.run();
+  Managing m = Managing(filePath, suspiciousStrength);
+  m.run();
 
   return 0;
 }
