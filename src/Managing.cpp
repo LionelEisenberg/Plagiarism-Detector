@@ -15,15 +15,11 @@ void printvector(vector<string> path) {
 }
 
 int Managing::run() {
-  cout << "run" <<endl;
   vector<string> fileList = getMasterVector(masterfilePath);
-  printvector(fileList);
   return 0;
 }
 
 void Managing::printSuspiciousPairs() {
-  cout<<"Filepath: "<<masterfilePath<<endl;
-  cout<<"rigor: "<<rigor<<endl;
 }
 
 vector<string> Managing::getMasterVector(string masterfilePath){
@@ -41,7 +37,7 @@ vector<string> Managing::getMasterVector(string masterfilePath){
 string Managing::getContent(string filepath){
   string content = "";
   ifstream inFile;
-  inFile.open(masterfilePath);
+  inFile.open(filepath);
   string data;
   while(getline(inFile,data)){
     content += data;
