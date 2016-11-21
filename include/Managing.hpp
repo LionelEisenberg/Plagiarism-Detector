@@ -7,6 +7,9 @@ This file manages the list of files to search, and feeds in                     
 #include <cstring>
 #include <cstdio>
 #include <vector>
+#include <cstdlib>
+
+using namespace std;
 
 class Managing{
 
