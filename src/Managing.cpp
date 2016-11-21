@@ -16,6 +16,7 @@ void printvector(vector<string> path) {
 
 int Managing::run() {
   vector<string> fileList = getMasterVector(masterfilePath);
+  gotcha(fileList.at(0), fileList.at(1));
   return 0;
 }
 
