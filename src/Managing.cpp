@@ -1,4 +1,5 @@
 #include "../include/Managing.hpp"
+#include "../include/CheckPlagiarism.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -14,23 +15,15 @@ void printvector(vector<string> path) {
   }
 }
 
-int checkAll(string* one, string* two, char r){
-  cout<<*one<<endl;
-  cout<<*two<<endl;
-  cout<<r<<endl;
-  cout<<"*******************************************"<<endl;
-  return 1;
-}
-
 int Managing::run() {
-  string contentOne;
-  string contentTwo;
+  vector<string> contentOne;
+  vector<string> contentTwo;
   vector<string> fileList = getMasterVector(masterfilePath);
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
     contentOne = getContent(*i);
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
       contentTwo = getContent(*j);
-      if(checkAll(&contentOne,&contentTwo, rigor)){
+      if(checkAll(contentOne.begin(),&contentTwo.begin(), rigor)){
 	gotcha(*i,*j);
       }
     }
@@ -56,13 +49,13 @@ vector<string> Managing::getMasterVector(string masterfilePath){
   return fileList;
 }
 
-string Managing::getContent(string filepath){
-  string content = "";
+vector<string> Managing::getContent(string filepath){
+  vector<string> content; 
   ifstream inFile;
   inFile.open(filepath);
   string data;
-  while(getline(inFile,data)){
-    content += data;
+  while(inFile >> data){
+    content.push_back(data);
   }
   inFile.close();
   return content;
