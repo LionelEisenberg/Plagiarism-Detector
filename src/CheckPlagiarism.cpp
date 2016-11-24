@@ -1,4 +1,5 @@
 #include "../include/CheckPlagiarism.hpp"
+#include <algorithm> 
 #include <iostream>
 #include <vector>
 #include <string>
@@ -13,7 +14,7 @@ bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd
 }
 
 int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C.2B.2B
-  const std::size_t len1 = s1.size(), len2 = s2.size();
+  const std::size_t len1 = one.size(), len2 = two.size();
   std::vector<unsigned int> col(len2+1), prevCol(len2+1);
 
   for (unsigned int i = 0; i < prevCol.size(); i++)
@@ -21,7 +22,7 @@ int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks
   for (unsigned int i = 0; i < len1; i++) {
     col[0] = i+1;
     for (unsigned int j = 0; j < len2; j++)
-      col[j+1] = std::min({ prevCol[1 + j] + 1, col[j] + 1, prevCol[j] + (s1[i]==s2[j] ? 0 : 1) });
+      col[j+1] = std::min({ prevCol[1 + j] + 1, col[j] + 1, prevCol[j] + (one[i]==two[j] ? 0 : 1) });
     col.swap(prevCol);
   }
   return prevCol[len2];
@@ -48,30 +49,49 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
     twoEnd = temp;
   }
 
-  vector<int> stringLengths; //holds plagiarized string lengths
+  int totalPlagLength; //holds plagiarized string lengths
   double avgDist = 0.0;
   int totalDist = 0;
   vector<string> temp;
   
   for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){
     for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){
+      avgDist = 0.0;
+      totalDist = 0;
+      temp.clear();
       int dist = levenshteinDistance(*i,*it);
+
       if( dist < 2){ // if equalsish
 	temp.push_back(*i);
 	totalDist += dist;
-	avgDist = totalDist/temp.size();
-	if(avgDist > 1.5){
+	//************************************
+	vector<string>::iterator ite = i+1;
+	vector<string>::iterator iter = it+1;
+	while(avgDist < 1.5) {	  	  
+	  dist = levenshteinDistance(*ite, *iter);
+	  temp.push_back(*ite);
+	  totalDist += dist;
+	  avgDist = totalDist/temp.size();
+	  ite++;
+	  iter++;
+	}
+
+	if(temp.size() < 3) {
+	  continue;
+	}
+
+	else{
+	  temp.pop_back(); //gets rid of erroneous last word
+	  totalPlagLength += temp.size();
+	  i = ite-1;
 	  break;
 	}
-	
       }
     }//end inner
-    avgDist = 0.0;
-    totalDist = 0;
-    stringLengths.push_back(temp.size());
-    temp.clear(); 
   }//end outer
-  
+cout << totalPlagLength/getLength(oneBegin, oneEnd);
+return true;
+
 }
 
 bool isSameFile(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd) {
