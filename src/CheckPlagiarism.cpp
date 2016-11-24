@@ -9,7 +9,7 @@ using namespace std;
 
 bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor) {
   return isSameFile(oneBegin, oneEnd, twoBegin, twoEnd);
-  return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
+  //return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
 }
 
 int levenshteinDistance(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd) {
@@ -24,7 +24,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 bool isSameFile(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd) {
   vector<string>::iterator i;
   vector<string>::iterator it = twoBegin;
-
+  
   if(getLength(oneBegin, oneEnd) != getLength(twoBegin, twoEnd)) {
     return false;
   }
