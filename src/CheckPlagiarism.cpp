@@ -9,8 +9,8 @@
 using namespace std;
 
 bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor) {
-  return isSameFile(oneBegin, oneEnd, twoBegin, twoEnd);
-  //return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
+  //return isSameFile(oneBegin, oneEnd, twoBegin, twoEnd);
+  return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
 }
 
 int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C.2B.2B
@@ -39,6 +39,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
   //   We stop when average distance exceeds threshold.
   //   At this point - move iterator of vector one to the end of the active string. Reset vector two. Reset Average distance.
 
+  //cout<<"entered function"<<endl;
   if(getLength(oneBegin,oneEnd) > getLength(twoBegin,twoEnd)){ //always makes sure vector one is the smaller of the two
     auto temp = oneBegin;
     oneBegin = twoBegin;
@@ -89,7 +90,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
       }
     }//end inner
   }//end outer
-cout << totalPlagLength/getLength(oneBegin, oneEnd);
+  cout << totalPlagLength/getLength(oneBegin, oneEnd)<<"This is a literal\n"<<endl;;
 return true;
 
 }
