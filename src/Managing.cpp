@@ -24,7 +24,8 @@ int Managing::run() {
     printvector(contentOne);
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
       contentTwo = getContent(*j);
-      if(1){//checkAll(contentOne.begin(),&contentTwo.begin(), rigor)){
+      
+      if(1){//checkAll(contentOne.begin(),contentOne.end(),contentTwo.begin(), contentTwo.end(), rigor)){
 	gotcha(*i,*j);
       }
     }

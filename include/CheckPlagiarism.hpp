@@ -17,9 +17,10 @@ This class contains methods used by Managing.cpp to check for various types of p
 
 using namespace std;
 
-bool checkAll(vector<string>::iterator one, vector<string>::iterator two, char rigor); //goes through and checks to string vectors for plagerism by calling various methods
+bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor); //goes through and checks to string vectors for plagerism by calling various methods
 int levenshteinDistance(vector<string>::iterator one, vector<string>::iterator two); //returns levenshtein distance between two string vectors
 int getLength(vector<string>::iterator begin, vector<string>::iterator end); //returns length of vector based on begin and end iterators
+
 bool isSameFile(vector<string>::iterator one, vector<string>::iterator two);
-bool checkControlC(vector<string>::iterator one, vector<string>::iterator two, char rigor); //checks two string vector for "Control-C" type plagerism 
+bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor); //checks two vectors for "Control-C" plagiarism
 
