@@ -33,7 +33,7 @@ bool isSameFile(vector<string>::iterator oneBegin, vector<string>::iterator oneE
     if(*i != *it) {
       return false;
     }
-    it++
+    it++;
   }
 
   return true;
