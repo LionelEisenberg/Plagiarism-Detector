@@ -11,7 +11,7 @@ using namespace std;
 
 void printvector(vector<string> path) {
   for (vector<string>::const_iterator i = path.begin(); i != path.end(); i++) {
-    cout << *i << endl;
+    cout << *i << " ";
   }
 }
 
@@ -21,9 +21,10 @@ int Managing::run() {
   vector<string> fileList = getMasterVector(masterfilePath);
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
     contentOne = getContent(*i);
+    printvector(contentOne);
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
       contentTwo = getContent(*j);
-      if(checkAll(contentOne.begin(),&contentTwo.begin(), rigor)){
+      if(1){//checkAll(contentOne.begin(),&contentTwo.begin(), rigor)){
 	gotcha(*i,*j);
       }
     }
