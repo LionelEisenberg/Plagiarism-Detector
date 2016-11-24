@@ -37,7 +37,7 @@ bool CheckPlagiarism::isSameFile(vector<string>::iterator oneBegin, vector<strin
 
 int CheckPlagiarism::getLength(vector<string>::iterator begin, vector<string>::iterator end) {
   int length = 0;
-  for(auto i = begin; i != end; i++) {
+  for(vector<string>::iterator i = begin; i != end; i++) {
     length++;
   }
   return length;
