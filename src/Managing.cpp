@@ -21,7 +21,7 @@ int Managing::run() {
   vector<string> fileList = getMasterVector(masterfilePath);
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
     contentOne = getContent(*i);
-    printvector(contentOne);
+    //printvector(contentOne);
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
       contentTwo = getContent(*j);      
       if(checkAll(contentOne.begin(),contentOne.end(),contentTwo.begin(), contentTwo.end(), rigor)) {
