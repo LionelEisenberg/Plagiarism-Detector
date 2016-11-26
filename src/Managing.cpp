@@ -40,6 +40,7 @@ int Managing::run() {
 	cout<<"post-gotcha"<<endl;
       }
     }
+    countTwo = 0;
   }
   cout<<"we gucci"<<endl;
   return 0;
