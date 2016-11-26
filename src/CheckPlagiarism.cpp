@@ -50,50 +50,48 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
     twoEnd = temp;
     cout<<"end of swaps"<<endl;
   }
+  
   cout<<getLength(oneBegin,oneEnd)<<endl;
   cout<<getLength(twoBegin,twoEnd)<<endl;
-  cout<<"after length check"<<endl;
+
   int totalPlagLength; //holds plagiarized string lengths
   double avgDist = 0.0;
-  int totalDist = 0;
+  double totalDist = 0.0;
   vector<string> temp;
-  cout<<"pre loops"<<endl;
+
   for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){
     cout<<"loop one entered"<<endl;
     for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){
       cout<<"loop two entered"<<endl;
       avgDist = 0.0;
-      totalDist = 0;
-      cout<<"pre clear"<<endl;
+      totalDist = 0.0;
       temp.clear();
-      cout<<"before lstein"<<endl;
-      int dist = levenshteinDistance(*i,*it);
-      cout<<"after lstein"<<endl;
-      if( dist < 2){ // if equalsish
+      
+      double dist = levenshteinDistance(*i,*it);
+      if(dist < 2){ // if equalsish
 	temp.push_back(*i);
 	totalDist += dist;
 	//************************************
 	vector<string>::iterator ite = i+1;
 	vector<string>::iterator iter = it+1;
 	cout<<"after iterator increment"<<endl;
-	while(avgDist < 1.5 && ite != oneEnd -1) {	  	  
-	  cout<<"one"<<endl;
+	while(avgDist < 1.5 && ite != oneEnd) {	  	  
 	  dist = levenshteinDistance(*ite, *iter);
-	  cout<<"two"<<endl;
+	  cout << "Distance is: " << dist << endl;
+	  cout << *ite << " " << *iter <<endl;
 	  temp.push_back(*ite);
-	  cout<<"three"<<endl;
+	  for(auto itera = temp.begin(); itera != temp.end(); itera++) {
+	    cout << *itera << " ";
+	  }
+	  cout << endl;
 	  totalDist += dist;
-	  cout<<"four"<<endl;
+	  cout << temp.size() << " is size of wector" << endl;
 	  avgDist = totalDist/temp.size();
-	  cout<<"five"<<endl;
 	  ite++;
-	  cout<<"six"<<endl;
 	  iter++;
-	  cout<<"seven"<<endl;
 	  cout<<"total dist "<<totalDist<<endl;
 	  cout<<"avgDist "<<avgDist<<endl;
 	}
-	cout<<"after while"<<endl;
 	if(temp.size() < 3) {
 	  continue;
 	}
@@ -103,8 +101,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 	  totalPlagLength += temp.size();
 	  i = ite-1;
 	  break;
-	}
-	cout<<"end inne loop"<<endl;
+	}	
       }
     }//end inner
   }//end outer
