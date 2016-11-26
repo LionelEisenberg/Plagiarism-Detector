@@ -19,28 +19,28 @@ int Managing::run() {
   vector<string> contentOne;
   vector<string> contentTwo;
   vector<string> fileList = getMasterVector(masterfilePath);
-  int countOne = 0;
-  int countTwo = 0;
+  //int countOne = 0;
+  //int countTwo = 0;
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
-    countOne++;
-    cout<<"outer loop file: "<<countOne<<endl;
-    cout<<"one"<<endl;
+    //countOne++;
+    //cout<<"outer loop file: "<<countOne<<endl;
+    //cout<<"one"<<endl;
     contentOne = getContent(*i);
     //printvector(contentOne);
-    cout<<"two"<<endl;
+    //cout<<"two"<<endl;
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
-      countTwo++;
-      cout<<"inner loop file: "<<countTwo<<endl;
-      cout<<"three"<<endl;
+      //countTwo++;
+      //cout<<"inner loop file: "<<countTwo<<endl;
+      //cout<<"three"<<endl;
       contentTwo = getContent(*j);      
-      cout<<"four"<<endl;
+      //cout<<"four"<<endl;
       if(checkAll(contentOne.begin(),contentOne.end(),contentTwo.begin(), contentTwo.end(), rigor)) {
-	cout<<"pre-gotcha"<<endl;
+	//cout<<"pre-gotcha"<<endl;
 	gotcha(*i,*j);
-	cout<<"post-gotcha"<<endl;
+	//cout<<"post-gotcha"<<endl;
       }
     }
-    countTwo = 0;
+    //countTwo = countOne;
   }
   cout<<"we gucci"<<endl;
   return 0;

@@ -39,8 +39,9 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
   //   We stop when average distance exceeds threshold.
   //   At this point - move iterator of vector one to the end of the active string. Reset vector two. Reset Average distance.
 
-  //cout<<"entered function"<<endl;
+  cout<<"entered function"<<endl;
   if(getLength(oneBegin,oneEnd) > getLength(twoBegin,twoEnd)){ //always makes sure vector one is the smaller of the two
+    //cout<<"begin swaps"<<endl;
     auto temp = oneBegin;
     oneBegin = twoBegin;
     twoBegin = temp;
@@ -61,9 +62,9 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
   double plagPercent;
   
   for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){
-    //cout<<"loop one entered"<<endl;
+    cout<<"loop one entered"<<endl;
     for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){
-      //cout<<"loop two entered"<<endl;
+      cout<<"loop two entered"<<endl;
       avgDist = 0.0;
       totalDist = 0.0;
       temp.clear();
@@ -76,22 +77,22 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 	//************************************
 	vector<string>::iterator ite = i+1;
 	vector<string>::iterator iter = it+1;
-	//cout<<"after iterator increment"<<endl;
+	cout<<"after iterator increment"<<endl;
 	while(avgDist < 1.5 && ite != oneEnd) {	  	  
 	  dist = levenshteinDistance(*ite, *iter);
-	  //cout << "Distance is: " << dist << endl;
+	  cout << "Distance is: " << dist << endl;
 	  //cout << *ite << " " << *iter <<endl;
 	  temp.push_back(*ite);
-	  /*for(auto itera = temp.begin(); itera != temp.end(); itera++) {
+	  for(auto itera = temp.begin(); itera != temp.end(); itera++) {
 	    cout << *itera << " ";
-	  }*/
+	  }
 	  //cout << endl;
 	  totalDist += dist;
-	  //cout << temp.size() << " is size of wector" << endl;
+	  cout << temp.size() << " is size of wector" << endl;
 	  avgDist = totalDist/temp.size();
 	  ite++;
 	  iter++;
-	  //cout<<"total dist "<<totalDist<<endl;
+	  cout<<"total dist "<<totalDist<<endl;
 	  //cout<<"avgDist "<<avgDist<<endl;
 	}
 	if(temp.size() < 3) {
@@ -100,10 +101,11 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 
 	else{
 	  if(dist > 3) {
+	    cout<<"NOT END OF FILE"<<endl;
 	    temp.pop_back(); //gets rid of erroneous last word if the reason why we broke the build was because the avgDist was to big
 	  }
 	  totalPlagLength += temp.size();
-	  //cout << totalPlagLength << " is the length of plagiarised words" << endl;
+	  cout << totalPlagLength << " is the length of plagiarised words" << endl;
 	  i = ite-1;
 	  break;
 	}	
