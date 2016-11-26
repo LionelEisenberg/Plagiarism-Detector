@@ -39,7 +39,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
   //   We stop when average distance exceeds threshold.
   //   At this point - move iterator of vector one to the end of the active string. Reset vector two. Reset Average distance.
 
-  //cout<<"entered function"<<endl;
+  cout<<"entered function"<<endl;
   if(getLength(oneBegin,oneEnd) > getLength(twoBegin,twoEnd)){ //always makes sure vector one is the smaller of the two
     auto temp = oneBegin;
     oneBegin = twoBegin;
@@ -48,35 +48,52 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
     temp = oneEnd;
     oneEnd = twoEnd;
     twoEnd = temp;
+    cout<<"end of swaps"<<endl;
   }
-
+  cout<<getLength(oneBegin,oneEnd)<<endl;
+  cout<<getLength(twoBegin,twoEnd)<<endl;
+  cout<<"after length check"<<endl;
   int totalPlagLength; //holds plagiarized string lengths
   double avgDist = 0.0;
   int totalDist = 0;
   vector<string> temp;
-  
+  cout<<"pre loops"<<endl;
   for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){
+    cout<<"loop one entered"<<endl;
     for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){
+      cout<<"loop two entered"<<endl;
       avgDist = 0.0;
       totalDist = 0;
+      cout<<"pre clear"<<endl;
       temp.clear();
+      cout<<"before lstein"<<endl;
       int dist = levenshteinDistance(*i,*it);
-
+      cout<<"after lstein"<<endl;
       if( dist < 2){ // if equalsish
 	temp.push_back(*i);
 	totalDist += dist;
 	//************************************
 	vector<string>::iterator ite = i+1;
 	vector<string>::iterator iter = it+1;
-	while(avgDist < 1.5) {	  	  
+	cout<<"after iterator increment"<<endl;
+	while(avgDist < 1.5 && ite != oneEnd -1) {	  	  
+	  cout<<"one"<<endl;
 	  dist = levenshteinDistance(*ite, *iter);
+	  cout<<"two"<<endl;
 	  temp.push_back(*ite);
+	  cout<<"three"<<endl;
 	  totalDist += dist;
+	  cout<<"four"<<endl;
 	  avgDist = totalDist/temp.size();
+	  cout<<"five"<<endl;
 	  ite++;
+	  cout<<"six"<<endl;
 	  iter++;
+	  cout<<"seven"<<endl;
+	  cout<<"total dist "<<totalDist<<endl;
+	  cout<<"avgDist "<<avgDist<<endl;
 	}
-
+	cout<<"after while"<<endl;
 	if(temp.size() < 3) {
 	  continue;
 	}
@@ -87,10 +104,11 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 	  i = ite-1;
 	  break;
 	}
+	cout<<"end inne loop"<<endl;
       }
     }//end inner
   }//end outer
-  cout << totalPlagLength/getLength(oneBegin, oneEnd)<<"This is a literal\n"<<endl;;
+cout << totalPlagLength/getLength(oneBegin, oneEnd)<<"This is a literal\n"<<endl;;
 return true;
 
 }
