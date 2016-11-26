@@ -20,15 +20,22 @@ int Managing::run() {
   vector<string> contentTwo;
   vector<string> fileList = getMasterVector(masterfilePath);
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
+    cout<<"one"<<endl;
     contentOne = getContent(*i);
     //printvector(contentOne);
+    cout<<"two"<<endl;
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
+      cout<<"three"<<endl;
       contentTwo = getContent(*j);      
+      cout<<"four"<<endl;
       if(checkAll(contentOne.begin(),contentOne.end(),contentTwo.begin(), contentTwo.end(), rigor)) {
+	cout<<"pre-gotcha"<<endl;
 	gotcha(*i,*j);
+	cout<<"post-gotcha"<<endl;
       }
     }
   }
+  cout<<"we gucci"<<endl;
   return 0;
 }
 
