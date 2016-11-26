@@ -54,7 +54,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
   cout<<getLength(oneBegin,oneEnd)<<endl;
   cout<<getLength(twoBegin,twoEnd)<<endl;
 
-  int totalPlagLength; //holds plagiarized string lengths
+  double totalPlagLength; //holds plagiarized string lengths
   double avgDist = 0.0;
   double totalDist = 0.0;
   vector<string> temp;
@@ -97,16 +97,24 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 	}
 
 	else{
-	  temp.pop_back(); //gets rid of erroneous last word
+	  if(dist > 3) {
+	    temp.pop_back(); //gets rid of erroneous last word if the reason why we broke the build was because the avgDist was to big
+	  }
 	  totalPlagLength += temp.size();
+	  cout << totalPlagLength << " is the length of plagiarised words" << endl;
 	  i = ite-1;
 	  break;
 	}	
       }
     }//end inner
   }//end outer
-cout << totalPlagLength/getLength(oneBegin, oneEnd)<<"This is a literal\n"<<endl;;
-return true;
+  double plagPercent = totalPlagLength/getLength(oneBegin, oneEnd);
+  cout << totalPlagLength/getLength(oneBegin, oneEnd)<< "This is a literal\n" <<endl;;
+  
+  if(plagPercent > 0.2 || totalPlagLength > 100)
+    return true;
+  else
+    return false;
 
 }
 
