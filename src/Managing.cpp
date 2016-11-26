@@ -19,12 +19,18 @@ int Managing::run() {
   vector<string> contentOne;
   vector<string> contentTwo;
   vector<string> fileList = getMasterVector(masterfilePath);
+  int countOne = 0;
+  int countTwo = 0;
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
+    countOne++;
+    cout<<"outer loop file: "<<countOne<<endl;
     cout<<"one"<<endl;
     contentOne = getContent(*i);
     //printvector(contentOne);
     cout<<"two"<<endl;
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
+      countTwo++;
+      cout<<"inner loop file: "<<countTwo<<endl;
       cout<<"three"<<endl;
       contentTwo = getContent(*j);      
       cout<<"four"<<endl;
