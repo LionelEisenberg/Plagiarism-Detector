@@ -20,16 +20,17 @@ int Managing::run() {
   vector<string> contentTwo;
   vector<string> fileList = getMasterVector(masterfilePath);
   int countOne = 0;
-  int countTwo = 0;
+  int countTwo = 1;
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
-    //countOne++;
+    countOne++;
     //cout<<"outer loop file: "<<countOne<<endl;
     //cout<<"one"<<endl;
     contentOne = getContent(*i);
     //printvector(contentOne);
     //cout<<"two"<<endl;
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
-      //countTwo++;
+      countTwo++;
+      cout<<"Comparing "<<countOne<<" to "<<countTwo<<endl;
       //cout<<"inner loop file: "<<countTwo<<endl;
       //cout<<"three"<<endl;
       contentTwo = getContent(*j);      
@@ -40,7 +41,7 @@ int Managing::run() {
 	//cout<<"post-gotcha"<<endl;
       }
     }
-    //countTwo = countOne;
+    countTwo = countOne + 1;
   }
   cout<<"we gucci"<<endl;
   return 0;
