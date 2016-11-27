@@ -19,8 +19,8 @@ int Managing::run() {
   vector<string> contentOne;
   vector<string> contentTwo;
   vector<string> fileList = getMasterVector(masterfilePath);
-  //int countOne = 0;
-  //int countTwo = 0;
+  int countOne = 0;
+  int countTwo = 0;
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
     //countOne++;
     //cout<<"outer loop file: "<<countOne<<endl;
