@@ -35,6 +35,11 @@ int Managing::run() {
       //cout<<"three"<<endl;
       contentTwo = getContent(*j);      
       //cout<<"four"<<endl;
+      if(countOne == 3 && countTwo == 10){
+	cout<<"SKIPPED"<<endl;
+	continue;
+      }
+      
       if(checkAll(contentOne.begin(),contentOne.end(),contentTwo.begin(), contentTwo.end(), rigor)) {
 	//cout<<"pre-gotcha"<<endl;
 	gotcha(*i,*j);
