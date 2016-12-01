@@ -9,7 +9,7 @@
 using namespace std;
 
 bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor) {
-  if(isSameFile(oneBegin, oneEnd, twoBegin, twoEnd)) {
+  /*if(isSameFile(oneBegin, oneEnd, twoBegin, twoEnd)) {
     return true;
   }
   else if(checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor)) {
@@ -17,7 +17,8 @@ bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd
   }
   else {
     return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
-  }
+  }*/
+  return checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor);
 }
 
 int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C.2B.2B
@@ -35,8 +36,90 @@ int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks
   return prevCol[len2];
 }
 
-bool checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor) {
-  //check plag using Ngram;
+bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
+  if(getLength(oneBegin,oneEnd) > getLength(twoBegin,twoEnd)){ //always makes sure vector one is the smaller of the two
+    //cout<<"begin swaps"<<endl;
+    auto temp = oneBegin;
+    oneBegin = twoBegin;
+    twoBegin = temp;
+
+    temp = oneEnd;
+    oneEnd = twoEnd;
+    twoEnd = temp;
+    //cout<<"end of swaps"<<endl;
+    //MAKE THIS A SEPARATE FUNCTION
+  }
+
+  //cout<<getLength(oneBegin,oneEnd)<<endl;
+  //cout<<getLength(twoBegin,twoEnd)<<endl;
+
+  double totalPlagLength; //holds plagiarized string lengths
+  int exceptions = 0;
+  //double totalDist = 0.0;
+  vector<string> temp;
+  double plagPercent;  //plagiarized string length over total length
+
+  for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){
+    //cout<<"loop one entered"<<endl;
+    for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){
+      //cout<<"loop two entered"<<endl;
+      exceptions = 0;
+      temp.clear();
+
+     
+      if(*i == *it){
+	//cout << *i << " current word" << endl;
+	temp.push_back(*i);
+	
+	//************************************
+	vector<string>::iterator ite = i+1;
+	vector<string>::iterator iter = it+1;
+	//cout<<"after iterator increment"<<endl;
+	while(exceptions < 3 && ite != oneEnd) {
+	  
+	  //cout << "Distance is: " << dist << endl;
+	  //cout << *ite << " " << *iter <<endl;
+	  temp.push_back(*ite);
+	  /*for(auto itera = temp.begin(); itera != temp.end(); itera++) {                                                                                                                                                                                                                                                                                                                                                             
+            cout << *itera << " ";                                                                                                                                                                                                                                                                                                                                                                                                     
+	    }*/
+	  //cout << endl;
+	  
+	  //cout << temp.size() << " is size of wector" << endl;
+	  if(*ite != *iter){
+	    exceptions++;
+	  }
+	  ite++;
+	  iter++;
+	  //cout<<"total dist "<<totalDist<<endl;
+	  //cout<<"avgDist "<<avgDist<<endl;
+	}
+	if(temp.size() < 4) {
+	  continue;
+	}
+
+	else{
+	  if(*(ite-1) != *(iter-1)) {
+	    //cout<<"NOT END OF FILE"<<endl;
+	    temp.pop_back(); //gets rid of erroneous last word if the reason why we broke the build was because the avgDist was to big
+	  }
+	  totalPlagLength += temp.size();
+	  //cout << totalPlagLength << " is the length of plagiarised words" << endl;
+	  i = ite-1;
+	  break;
+	}
+      }
+    }//end inner
+    plagPercent = totalPlagLength/getLength(oneBegin, oneEnd);
+    if(plagPercent > 0.2 || totalPlagLength > 100) {
+      //cout << plagPercent << endl;
+      //cout << totalPlagLength << endl;
+      return true;
+    }
+  }//end outer
+  return false;
+
+  
 }
 
 bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){

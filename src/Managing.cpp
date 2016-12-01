@@ -35,10 +35,10 @@ int Managing::run() {
       //cout<<"three"<<endl;
       contentTwo = getContent(*j);      
       //cout<<"four"<<endl;
-      if((countOne == 3 && countTwo == 10) && (countOne == 7 && countTwo == 25)){
+      /* if((countOne == 3 && countTwo == 10) && (countOne == 7 && countTwo == 25)){
 	cout<<"SKIPPED"<<endl;
 	continue;
-      }
+	}*/
       
       if(checkAll(contentOne.begin(),contentOne.end(),contentTwo.begin(), contentTwo.end(), rigor)) {
 	//cout<<"pre-gotcha"<<endl;
