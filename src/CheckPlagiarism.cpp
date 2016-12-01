@@ -36,20 +36,16 @@ int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks
   return prevCol[len2];
 }
 
-bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
-  if(getLength(oneBegin,oneEnd) > getLength(twoBegin,twoEnd)){ //always makes sure vector one is the smaller of the two
-    //cout<<"begin swaps"<<endl;
-    auto temp = oneBegin;
-    oneBegin = twoBegin;
-    twoBegin = temp;
-
-    temp = oneEnd;
-    oneEnd = twoEnd;
-    twoEnd = temp;
-    //cout<<"end of swaps"<<endl;
-    //MAKE THIS A SEPARATE FUNCTION
+void swap(vector<string>::iterator *oneBegin, vector<string>::iterator *oneEnd,vector<string>::iterator* twoBegin,vector<string>::iterator* twoEnd) {
+  if(getLength(*oneBegin,*oneEnd) > getLength(*twoBegin,*twoEnd)){ //always makes sure vector one is the smaller of the two
+    iter_swap(*oneBegin, *twoBegin);
+    iter_swap(*oneEnd, *twoEnd);
   }
+}
 
+bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
+  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
+  
   //cout<<getLength(oneBegin,oneEnd)<<endl;
   //cout<<getLength(twoBegin,twoEnd)<<endl;
 
@@ -134,18 +130,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
   //   At this point - move iterator of vector one to the end of the active string. Reset vector two. Reset Average distance.
 
   //cout<<"entered function"<<endl;
-  if(getLength(oneBegin,oneEnd) > getLength(twoBegin,twoEnd)){ //always makes sure vector one is the smaller of the two
-    //cout<<"begin swaps"<<endl;
-    auto temp = oneBegin;
-    oneBegin = twoBegin;
-    twoBegin = temp;
-
-    temp = oneEnd;
-    oneEnd = twoEnd;
-    twoEnd = temp;
-    //cout<<"end of swaps"<<endl;
-  }
-  
+  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
   //cout<<getLength(oneBegin,oneEnd)<<endl;
   //cout<<getLength(twoBegin,twoEnd)<<endl;
 
