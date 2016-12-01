@@ -35,7 +35,7 @@ int Managing::run() {
       //cout<<"three"<<endl;
       contentTwo = getContent(*j);      
       //cout<<"four"<<endl;
-      if(countOne == 3 && countTwo == 10){
+      if((countOne == 3 && countTwo == 10) && (countOne == 7 && countTwo == 25)){
 	cout<<"SKIPPED"<<endl;
 	continue;
       }
@@ -48,7 +48,7 @@ int Managing::run() {
     }
     countTwo = countOne + 1;
   }
-  cout<<"we gucci"<<endl;
+  
   return 0;
 }
 
