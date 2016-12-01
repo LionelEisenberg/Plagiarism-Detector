@@ -18,7 +18,7 @@ bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd
   else {
     return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
   }*/
-  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
+  //swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
   return checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor);
 }
 
@@ -42,13 +42,25 @@ void swap(vector<string>::iterator *oneBegin, vector<string>::iterator *oneEnd,v
     iter_swap(*oneBegin, *twoBegin);
     iter_swap(*oneEnd, *twoEnd);
   }
+  
 }
 
 bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
+  if(getLength(oneBegin,oneEnd) > getLength(twoBegin,twoEnd)){ //always makes sure vector one is the smaller of the two
+    
+    //cout<<"begin swaps"<<endl;
+    auto temp = oneBegin;
+    oneBegin = twoBegin;
+    twoBegin = temp;
+    
+    temp = oneEnd;
+    oneEnd = twoEnd;
+    twoEnd = temp;
+        //cout<<"end of swaps"<<endl;
+    }
   
-  
-  //cout<<getLength(oneBegin,oneEnd)<<endl;
-  //cout<<getLength(twoBegin,twoEnd)<<endl;
+  cout<<getLength(oneBegin,oneEnd)<<endl;
+  cout<<getLength(twoBegin,twoEnd)<<endl;
 
   double totalPlagLength; //holds plagiarized string lengths
   int exceptions = 0;
@@ -61,9 +73,7 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
     for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){
       //cout<<"loop two entered"<<endl;
       exceptions = 0;
-      temp.clear();
-
-     
+      temp.clear();     
       if(*i == *it){
 	//cout << *i << " current word" << endl;
 	temp.push_back(*i);
@@ -77,13 +87,7 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
 	  //cout << "Distance is: " << dist << endl;
 	  //cout << *ite << " " << *iter <<endl;
 	  temp.push_back(*ite);
-	  /*for(auto itera = temp.begin(); itera != temp.end(); itera++) {                                                                                                                                                                                                                                                                                                                                                             
-            cout << *itera << " ";                                                                                                                                                                                                                                                                                                                                                                                                     
-	    }*/
-	  //cout << endl;
-	  
-	  //cout << temp.size() << " is size of wector" << endl;
-	  if(*ite != *iter){
+      	  if(*ite != *iter){
 	    exceptions++;
 	  }
 	  ite++;
@@ -91,7 +95,7 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
 	  //cout<<"total dist "<<totalDist<<endl;
 	  //cout<<"avgDist "<<avgDist<<endl;
 	}
-	if(temp.size() < 4) {
+	if(temp.size() < 5) {
 	  continue;
 	}
 
@@ -108,28 +112,32 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
       }
     }//end inner
     plagPercent = totalPlagLength/getLength(oneBegin, oneEnd);
-    if(plagPercent > 0.2 || totalPlagLength > 100) {
-      //cout << plagPercent << endl;
-      //cout << totalPlagLength << endl;
-      return true;
+    
+    switch(rigor) {
+    case 'h':
+      if(plagPercent > 0.2 || totalPlagLength > 100) {
+	return true;
+      }
+      break;
+    case 'm':
+      if(plagPercent > 0.4 ) {
+	return true;
+      }
+      break;
+    case 'l':
+      if(plagPercent > 0.7 ) {
+	return true;
+      }
+      break;
     }
-  }//end outer
+    //cout << plagPercent << " is the plagiarism Percentage and " << totalPlagLength << " is the totalPlagLength " << endl;
+  }
   return false;
 
   
 }
 
 bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
-  //1. Check which vector is smaller (this is vector one)
-  //2. declare a string length vector (type int)
-  //   declare a average distance int
-  //3. Iterator through one -> iterator through two
-  //4. if iterator of one equalsish iterator of two
-  //   then update average distance. update string length.
-  //   proceed to include next word. Repeat step 4.
-  //   We stop when average distance exceeds threshold.
-  //   At this point - move iterator of vector one to the end of the active string. Reset vector two. Reset Average distance.
-
   //cout<<"entered function"<<endl;
   
   //cout<<getLength(oneBegin,oneEnd)<<endl;
@@ -192,12 +200,25 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
       }
     }//end inner
     plagPercent = totalPlagLength/getLength(oneBegin, oneEnd);
-    if(plagPercent > 0.2 || totalPlagLength > 100) {
-      //cout << plagPercent << endl;
-      //cout << totalPlagLength << endl;
-      return true;
+    
+    switch(rigor) {
+    case 'h':
+      if(plagPercent > 0.2 || totalPlagLength > 100) {
+	return true;
+      }
+      break;
+    case 'm':
+      if(plagPercent > 0.4 ) {
+	return true;
+      }
+      break;
+    case 'l':
+      if(plagPercent > 0.7 ) {
+	return true;
+      }
+      break;
     }
-  }//end outer
+  }
   return false;
 
 }
