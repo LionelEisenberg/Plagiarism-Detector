@@ -9,8 +9,15 @@
 using namespace std;
 
 bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor) {
-  //return isSameFile(oneBegin, oneEnd, twoBegin, twoEnd);
-  return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
+  if(isSameFile(oneBegin, oneEnd, twoBegin, twoEnd)) {
+    return true;
+  }
+  else if(checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor)) {
+    return true;
+  }
+  else {
+    return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
+  }
 }
 
 int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C.2B.2B
@@ -26,6 +33,10 @@ int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks
     col.swap(prevCol);
   }
   return prevCol[len2];
+}
+
+bool checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor) {
+  //check plag using Ngram;
 }
 
 bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
