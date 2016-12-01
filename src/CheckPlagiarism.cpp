@@ -18,6 +18,7 @@ bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd
   else {
     return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
   }*/
+  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
   return checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor);
 }
 
@@ -44,7 +45,7 @@ void swap(vector<string>::iterator *oneBegin, vector<string>::iterator *oneEnd,v
 }
 
 bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
-  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
+  
   
   //cout<<getLength(oneBegin,oneEnd)<<endl;
   //cout<<getLength(twoBegin,twoEnd)<<endl;
@@ -130,7 +131,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
   //   At this point - move iterator of vector one to the end of the active string. Reset vector two. Reset Average distance.
 
   //cout<<"entered function"<<endl;
-  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
+  
   //cout<<getLength(oneBegin,oneEnd)<<endl;
   //cout<<getLength(twoBegin,twoEnd)<<endl;
 
