@@ -1,3 +1,10 @@
+// TODO
+// Make sure CheckControlC does not Seg Fault
+// Make sure isameFile works
+// implement thesaurus maybe
+// if quotes then dont say plagia?
+// 
+
 #include "../include/CheckPlagiarism.hpp"
 #include <algorithm> 
 #include <iostream>
@@ -18,7 +25,7 @@ bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd
   else {
     return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
   }*/
-  //swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
+  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
   return checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor);
 }
 
@@ -39,28 +46,20 @@ int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks
 
 void swap(vector<string>::iterator *oneBegin, vector<string>::iterator *oneEnd,vector<string>::iterator* twoBegin,vector<string>::iterator* twoEnd) {
   if(getLength(*oneBegin,*oneEnd) > getLength(*twoBegin,*twoEnd)){ //always makes sure vector one is the smaller of the two
-    iter_swap(*oneBegin, *twoBegin);
-    iter_swap(*oneEnd, *twoEnd);
+    auto temp = *oneBegin;
+    *oneBegin = *twoBegin;
+    *twoBegin = temp;
+
+    temp = *oneEnd;
+    *oneEnd = *twoEnd;
+    *twoEnd = temp;
   }
   
 }
 
 bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
-  if(getLength(oneBegin,oneEnd) > getLength(twoBegin,twoEnd)){ //always makes sure vector one is the smaller of the two
-    
-    //cout<<"begin swaps"<<endl;
-    auto temp = oneBegin;
-    oneBegin = twoBegin;
-    twoBegin = temp;
-    
-    temp = oneEnd;
-    oneEnd = twoEnd;
-    twoEnd = temp;
-        //cout<<"end of swaps"<<endl;
-    }
-  
-  cout<<getLength(oneBegin,oneEnd)<<endl;
-  cout<<getLength(twoBegin,twoEnd)<<endl;
+  //  cout<<getLength(oneBegin,oneEnd)<<endl;
+  //cout<<getLength(twoBegin,twoEnd)<<endl;
 
   double totalPlagLength; //holds plagiarized string lengths
   int exceptions = 0;
