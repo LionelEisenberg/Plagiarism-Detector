@@ -1,6 +1,9 @@
-/*                                                                                                                                          Lionel Eisenberg                                                                                                                            Sanat Deshpande                                                                                                                             
+/*   
+Lionel Eisenberg
+Sanat Deshpande
 
-This file manages the list of files to search, and feeds in                                                                                 appropriate input to the plagerism checker class                                                                                            */
+This file manages the list of files to search, and feeds in appropriate input to the CheckPlagiarism file.
+*/
 
 
 #include <iostream>
