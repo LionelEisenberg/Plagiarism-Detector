@@ -1,0 +1,3 @@
+../data/test_doc_set/test1.txt
+../data/test_doc_set/test2.txt
+../data/test_doc_set/empty_list.txt
