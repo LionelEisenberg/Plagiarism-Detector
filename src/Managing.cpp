@@ -58,6 +58,7 @@ void Managing::printSuspiciousPairs() {
   }
 }
 
+//**THESE TWO COULD BE WRITTEN AS THE SAME FUNCTION**
 vector<string> Managing::getMasterVector(string masterfilePath){
   vector<string> fileList;
   ifstream inFile;
