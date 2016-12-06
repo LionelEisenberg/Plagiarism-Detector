@@ -23,27 +23,13 @@ int Managing::run() {
   int countTwo = 1;
   for(vector<string>::iterator i = fileList.begin(); i != fileList.end() - 1; i++){
     countOne++;
-    //cout<<"outer loop file: "<<countOne<<endl;
-    //cout<<"one"<<endl;
     contentOne = getContent(*i);
-    //printvector(contentOne);
-    //cout<<"two"<<endl;
     for(vector<string>::iterator j = i + 1; j != fileList.end(); j++){
       countTwo++;
       cout<<"Comparing "<<countOne<<" to "<<countTwo<<endl;
-      //cout<<"inner loop file: "<<countTwo<<endl;
-      //cout<<"three"<<endl;
       contentTwo = getContent(*j);      
-      //cout<<"four"<<endl;
-      /* if((countOne == 3 && countTwo == 10) && (countOne == 7 && countTwo == 25)){
-	cout<<"SKIPPED"<<endl;
-	continue;
-	}*/
-      
       if(checkAll(contentOne.begin(),contentOne.end(),contentTwo.begin(), contentTwo.end(), rigor)) {
-	//cout<<"pre-gotcha"<<endl;
 	gotcha(*i,*j);
-	//cout<<"post-gotcha"<<endl;
       }
     }
     countTwo = countOne + 1;
