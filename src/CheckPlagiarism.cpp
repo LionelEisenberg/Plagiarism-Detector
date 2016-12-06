@@ -16,17 +16,16 @@
 using namespace std;
 
 bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor) {
-  /*if(isSameFile(oneBegin, oneEnd, twoBegin, twoEnd)) {
-    return true;
-  }
-  else if(checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor)) {
+  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
+  if(isSameFile(oneBegin, oneEnd, twoBegin, twoEnd)) {
     return true;
   }
   else {
+    return checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor);
+  }
+  /*else { //This is a function that checks plagiarism a bit more thoroughly however it was very time intensive on our machines so we decided not to include this test. however please feel free to uncomment this and try it out.
     return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
-  }*/
-  swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd);
-  return checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor);
+    }*/
 }
 
 int levenshteinDistance(string& one, string& two){ //source https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C.2B.2B
@@ -61,7 +60,7 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
   //  cout<<getLength(oneBegin,oneEnd)<<endl;
   //cout<<getLength(twoBegin,twoEnd)<<endl;
 
-  double totalPlagLength; //holds plagiarized string lengths
+  double totalPlagLength = 0.0; //holds plagiarized string lengths
   int exceptions = 0;
   //double totalDist = 0.0;
   vector<string> temp;
@@ -142,7 +141,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
   //cout<<getLength(oneBegin,oneEnd)<<endl;
   //cout<<getLength(twoBegin,twoEnd)<<endl;
 
-  double totalPlagLength; //holds plagiarized string lengths
+  double totalPlagLength = 0.0; //holds plagiarized string lengths
   double avgDist = 0.0;
   double totalDist = 0.0;
   vector<string> temp;
