@@ -88,9 +88,9 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
 	else{ 
 	  if(*(ite-1) != *(iter-1)) { //This if statement basically takes the last words out if they are the ones which caused our sentence to be flagged as no longer suspicious  
 	    temp.pop_back(); //gets rid of erroneous last word if the reason why we broke the build was because the avgDist was to big
-	    if(*(ite-2) != (iter -2)) {
+	    if(*(ite-2) != *(iter -2)) {
 	      temp.pop_back();
-	      if(*(ite-3) != (iter -3)) {
+	      if(*(ite-3) != *(iter -3)) {
 		temp.pop_back();
 	      }
 	    }
