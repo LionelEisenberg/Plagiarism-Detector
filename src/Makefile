@@ -1,9 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -pedantic -Wall -Wextra -g
 
-test: unitTest
-	./unitTest
-
 finalProject: driver.o Managing.o CheckPlagiarism.o
 	g++ -std=c++11 -pedantic -Wall -Wextra -O3 -o finalProject driver.o Managing.o CheckPlagiarism.o
 

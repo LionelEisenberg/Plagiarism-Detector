@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
       cout << "ERROR: Wrong Format for rigor parameter" << endl;
       return 0;
     }
-    rigor = argv[2][0];
+    rigor = tolower(argv[2][0]);
   }
 
   else {
