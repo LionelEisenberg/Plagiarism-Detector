@@ -18,7 +18,7 @@ This class contains methods used by CheckPlagiarism.cpp to check for various typ
 using namespace std;
 
 bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor); //goes through and checks to string vectors for plagerism by calling various methods
-int levenshteinDistance(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd); //returns levenshtein distance between two string vectors
+int levenshteinDistance(string& one, string& two); ///gets levenshtein distance between two strings
 int getLength(vector<string>::iterator begin, vector<string>::iterator end); //returns length of vector based on begin and end iterators
 
 bool isSameFile(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd);
