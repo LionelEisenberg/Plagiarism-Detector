@@ -24,4 +24,4 @@ unitTest: Managing.cpp CheckPlagiarism.cpp unitTestDriver.cpp unitTest-Plagiaris
 	$(CXX) $(CXXFLAGS) -o unitTest Managing.cpp CheckPlagiarism.cpp unitTestDriver.cpp unitTest-PlagiarismCheck.cpp
 
 clean:
-	rm -f finalProject 
+	rm -f all finalProject *.o

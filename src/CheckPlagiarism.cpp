@@ -23,7 +23,7 @@ bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd
   else if (checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor)){
     return true; //Gets an Ngram comparison of vectors
   }
-   /*else { //This is a function that checks plagiarism a bit more thoroughly however it was very time intensive on our machines so we decided not to include this test. however please feel free to uncomment this and try it out.
+  /*else { //This is a function that checks plagiarism a bit more thoroughly however it was very time intensive on our machines so we decided not to include this test. however please feel free to uncomment this and try it out.
     return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
     }*/
   return false;
@@ -52,8 +52,6 @@ void swap(vector<string>::iterator *oneBegin, vector<string>::iterator *oneEnd,v
     *oneBegin = *twoBegin;
     *twoBegin = temp;
 
-    cout<<"SWAPPED"<<endl;
-    
     temp = *oneEnd;
     *oneEnd = *twoEnd;
     *twoEnd = temp;
@@ -68,12 +66,11 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
   vector<string> temp = {}; //this vector temporary holds a sentence that both texts contain, we flag it as suspicious and record its length.
   double plagPercent = 0.0; //plagiarized string length over total length of text
 
-  for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){ //for loop that parses through file 1, AKA the smaller file
-    //cout << "enter first loop" << endl;
+  for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){ //for loop that parses through file 1, AKA the smaller fill
     for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){ //for loop that parses through file 2 for instance of i
       exceptions = 0;
       temp.clear();     
-      if(*i == *it && (i)!=(oneEnd-1) && (it)!=(twoEnd-1)){ //if the i and it iterators are equal, or if a word in file 1 is equal to a word in file 2 then start comparison of teh words that preceed these.
+      if(*i == *it) { //if the i and it iterators are equal, or if a word in file 1 is equal to a word in file 2 then start comparison of teh words that preceed these.
 	temp.push_back(*i); //add i to vector of plagiarised strings;
 	vector<string>::iterator ite = i+1; //create iterators to go through the sentence, while keeping out i and it iterators at their respective places
 	vector<string>::iterator iter = it+1;
@@ -156,7 +153,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 	totalDist += dist;
 	vector<string>::iterator ite = i+1;
 	vector<string>::iterator iter = it+1;
-	while(avgDist < 1.5 && ite != oneEnd) {	// while average distance is smaller than 1 and a half substitutions per word, and we have not reached the end of the file, we keep comparing words
+	while(avgDist < 1.5 && ite != oneEnd && iter != twoEnd) {	// while average distance is smaller than 1 and a half substitutions per word, and we have not reached the end of the file, we keep comparing words
 	  dist = levenshteinDistance(*ite, *iter); //set levenshtein distance to compare the next words
 	  temp.push_back(*ite);
 	  totalDist += dist; //increment total distance by current distance
@@ -170,8 +167,9 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 
 	else{
 	  if(dist > 3) { //if the last words were very different and were the reason we broke out of the build then pop it from the vector
-	    ite--;
 	    temp.pop_back();
+	    ite--;
+	    iter--;
 	  }
 	  totalPlagLength += temp.size(); //update totalPlageLength
 	  i = ite-1; //set iterator to the word at the end of the comparison

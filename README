@@ -1,8 +1,8 @@
 Final project for Intermediate Programming 600.120 (1) in Fall 2016.
 
-Sanat Deshpande (sdeshpa4)
 Lionel Eisenberg (leisenb5)
-------------------------------------------------------------------------
+Sanat Deshpande (sdeshpa4)
+-----------------------------------------------------------------------
 
 Contents:
 1. /data
@@ -21,12 +21,15 @@ Contents:
 	CheckPlagiarism.hpp: header file for class containing methods to compare two files for plagiarism
 	Managing.hpp: header file for class that sifts through files and compares pairs
 3. /src
+
    CheckPlagiarism.cpp: Contains method definitions for functions to check the content of two files for plagiarism
    Makefile: This compiles the project into the executable <finalProject>
    unitTest-PlagiarismCheck.cpp: Contains unit tests
    driver.cpp: creates a "Managing" object and passes all user input into it
    Managing.cpp: receives user input and systematically compares files for plagiarism using CheckPlagiarism.cpp
    unitTestDriver.cpp: driver for unit tests
+
+4. gitlog.txt
 
 ------------------------------------------------------------------------
 
@@ -35,7 +38,7 @@ What our code does, and how to run it:
 Running the command "make" will yield an executable called "finalProject".
 Our program takes two command line arguments:
     1. filePath of text file containing list of test documents
-    2. 'l', 'm', or 'h' (low, medium, or high rigor in testing for plagiarism).
+    2. 'l', 'm', or 'h' (low, medium, or high rigor in testing for plagiarism, high rigor returning the most suspicious files, low rigor returning the least).
 If the second argument is not included, then it is assumed to be 'm'
 
 Example:
@@ -48,6 +51,12 @@ large list at the very end of the program.
 
 
 ************************************
+OPTIMISATION:
+We commented out one of our methods when checking plagiarism that used the Levenshtein Distance algorithm to calculate the average distance
+between two sentences. This method looks at plagiarism in more depth as it compares two sentences more accurately then just looking at two sentences
+and seeing if their words are the same.
+Please feel free to uncomment the else statemenet in our CheckPlagiarism.cpp file and run the test again. This will run slower as we are doing more
+complicated operations, however the suspicious files catcher will be more thorough.
 
 APPROXIMATE RUNTIME:
 Our program runs through the small data set rather quickly, and runs faster on the 'h' setting.
@@ -55,4 +64,8 @@ Obviously runtime increases as the data set size increases, but each file pair b
 for the grader's convenience.
 --------------------------------------------------------------------------
 
-Project Feedback
+PROJECT FEEDBACK:
+This project was rather fun to write, we enjoyed having less restrictions which let us be creative and have to think more on our own.
+It was interesting to have to keep optimisation in mind, however it did force us to change our code as one section of our code took way too much time
+to write.
+Total this project took 25 hours to write.

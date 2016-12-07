@@ -80,4 +80,3 @@ TEST_CASE("run","[run]") {
   vector<string> low = l.printSuspiciousPairs();
   CHECK(low.empty() == true);
 }
-
