@@ -79,7 +79,12 @@ complicated operations, however the suspicious files catcher will be more thorou
 
 APPROXIMATE RUNTIME:
 Our program runs through the small data set rather quickly, and runs faster on the 'h' setting.
-    sm_doc_set ~ 
+
+approximate runtime:
+    sm_doc_set ~ 1second - 3seconds (depending on rigor)
+    med_doc_set ~ 8seconds - 20seconds
+    big_doc_set ~ 30minutes - 1hour
+
 Obviously runtime increases as the data set size increases, but each file pair being inspected is printed to screen to show the progress of the code
 for the grader's convenience.
 --------------------------------------------------------------------------
