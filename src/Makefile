@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -pedantic -Wall -Wextra -g
+CXXFLAGS = -std=c++11 -pedantic -O3 -Wall -Wextra -g
 
 test: unitTest
 	./unitTest
@@ -16,8 +16,8 @@ Managing.o: Managing.cpp ../include/Managing.hpp ../include/CheckPlagiarism.hpp
 CheckPlagiarism.o: CheckPlagiarism.cpp ../include/CheckPlagiarism.hpp
 	g++ -std=c++11 -pedantic -Wall -Wextra -O3 -c CheckPlagiarism.cpp ../include/CheckPlagiarism.hpp
 
-unitTest: CheckPlagiarism.cpp unitTestDriver.cpp unitTest-PlagiarismCheck.cpp ../include/CheckPlagiarism.hpp
-	$(CXX) $(CXXFLAGS) -o unitTest CheckPlagiarism.cpp unitTestDriver.cpp unitTest-PlagiarismCheck.cpp
+unitTest: Managing.cpp CheckPlagiarism.cpp unitTestDriver.cpp unitTest-PlagiarismCheck.cpp ../include/CheckPlagiarism.hpp
+	$(CXX) $(CXXFLAGS) -o unitTest Managing.cpp CheckPlagiarism.cpp unitTestDriver.cpp unitTest-PlagiarismCheck.cpp
 
 clean:
 	rm -f finalProject 

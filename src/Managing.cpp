@@ -38,10 +38,13 @@ int Managing::run() {
   return 0;
 }
 
-void Managing::printSuspiciousPairs() {
+vector<string> Managing::printSuspiciousPairs() {
+  vector<string> s;
   for(vector<string>::iterator i = suspiciousFiles.begin(); i != suspiciousFiles.end(); i++){
     cout<<*i<<endl;
+    s.push_back(*i);
   }
+  return s;
 }
 
 //**THESE TWO COULD BE WRITTEN AS THE SAME FUNCTION**

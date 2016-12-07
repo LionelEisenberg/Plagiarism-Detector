@@ -1,5 +1,6 @@
 #include "../include/catch.hpp" // simple unit-testing framework
 #include "../include/CheckPlagiarism.hpp" // the functions we want to test
+#include "../include/Managing.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -57,5 +58,29 @@ TEST_CASE("checkNgram","[checkNgram]"){
   vector<string> three = {"very","different","collection","of","strings"};
   CHECK(checkControlC(one.begin(),one.end(),two.begin(),two.end(),'h') == true);
   CHECK(checkControlC(one.begin(),one.end(),three.begin(),three.end(),'h') == false);
+}
+
+TEST_CASE("run","[run]") {
+  Managing h = Managing("../data/test2_file_list.txt", 'h');
+  Managing m = Managing("../data/test2_file_list.txt", 'm');
+  Managing l = Managing("../data/test2_file_list.txt", 'l');
+  CHECK(h.run() == 0);
+  CHECK(m.run() == 0);
+  CHECK(l.run() == 0);
+
+  vector<string> high = h.printSuspiciousPairs();
+  CHECK(high.at(0) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file2.txt");
+  CHECK(high.at(1) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file3.txt");
+  CHECK(high.at(2) == "../data/test_doc_set/file2.txt, ../data/test_doc_set/file3.txt");
+
+  vector<string> medium = m.printSuspiciousPairs();
+  CHECK(medium.at(0) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file2.txt");
+  CHECK(medium.at(1) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file3.txt");
+  CHECK(medium.at(2) == "../data/test_doc_set/file2.txt, ../data/test_doc_set/file3.txt");
+
+  vector<string> low = l.printSuspiciousPairs();
+  CHECK(low.at(0) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file2.txt");
+  CHECK(low.at(1) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file3.txt");
+  CHECK(low.at(2) == "../data/test_doc_set/file2.txt, ../data/test_doc_set/file3.txt");
 }
 

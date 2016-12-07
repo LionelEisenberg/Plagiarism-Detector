@@ -23,11 +23,9 @@ private:
 
 public:
   Managing(string fpath, char r) : masterfilePath(fpath), rigor(r){}
-  void printSuspiciousPairs(); //prints suspicious pairs
+  vector<string> printSuspiciousPairs(); //prints suspicious pairs and returns a vector of said pairs for testing purposes
   vector<string> getMasterVector(string masterfilePath); //gets vector of list of files to test
   vector<string> getContent(string filePath); //gets content of a file
   void gotcha(string filePathOne, string filePathTwo); //increments suspicious files list
   int run(); //runs all functions and interacts with plagerism checker functions
-
-
 };

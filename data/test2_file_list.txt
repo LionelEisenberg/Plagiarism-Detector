@@ -1,0 +1,4 @@
+../data/test_doc_set/file1.txt
+../data/test_doc_set/file2.txt
+../data/test_doc_set/file3.txt
+
