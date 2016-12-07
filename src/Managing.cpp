@@ -28,7 +28,16 @@ int Managing::run() {
       countTwo++;
       cout<<"Comparing "<<countOne<<" to "<<countTwo<<endl;
       contentTwo = getContent(*j);      
-      if( (countOne == 10 && countTwo == 69) || (countOne == 116 && countTwo == 321) ){
+      if( (countOne == 10 && countTwo == 69)
+	  || (countOne == 116 && countTwo == 321)
+	  || (countOne == 73 && countTwo == 1166)
+	  || (countOne == 52 && countTwo == 446)
+	  || (countOne == 124 && countTwo == 321)//check out 321
+	  || (countOne == 193 && countTwo == 321)
+	  || (countOne == 159 && countTwo == 211)
+	  || (countOne == 1 && countTwo == 441)
+	  || (countOne == 1 && countTwo == 480)
+	  ){
 	//10-69 for 'l' on medium list
 	//116-321 for 'h' on big list
 	continue;
