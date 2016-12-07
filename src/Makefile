@@ -1,6 +1,10 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -pedantic -O3 -Wall -Wextra -g
 
+default: all
+
+all: finalProject unitTest
+
 test: unitTest
 	./unitTest
 
