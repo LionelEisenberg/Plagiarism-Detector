@@ -71,12 +71,11 @@ TEST_CASE("run","[run]") {
   vector<string> high = h.printSuspiciousPairs();
   CHECK(high.at(0) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file2.txt");
   CHECK(high.at(1) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file3.txt");
-  CHECK(high.at(2) == "");
+  CHECK(high.at(2) == "../data/test_doc_set/file2.txt, ../data/test_doc_set/file3.txt");
 
   vector<string> medium = m.printSuspiciousPairs();
   CHECK(medium.at(0) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file2.txt");
-  CHECK(medium.at(1) == "../data/test_doc_set/file1.txt, ../data/test_doc_set/file3.txt");
-  CHECK(medium.at(2) == "../data/test_doc_set/file2.txt, ../data/test_doc_set/file3.txt");
+  CHECK(medium.at(1) == "../data/test_doc_set/file2.txt, ../data/test_doc_set/file3.txt");
 
   vector<string> low = l.printSuspiciousPairs();
   CHECK(low.empty() == true);

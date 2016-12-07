@@ -62,8 +62,8 @@ void swap(vector<string>::iterator *oneBegin, vector<string>::iterator *oneEnd,v
 bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd,vector<string>::iterator twoBegin,vector<string>::iterator twoEnd, char rigor){
   double totalPlagLength = 0.0; //holds plagiarized string lengths
   int exceptions = 0; //number of exceptions a sentence can have where an exception is equivalent to two words differing;
-  vector<string> temp; //this vector temporary holds a sentence that both texts contain, we flag it as suspicious and record its length.
-  double plagPercent; //plagiarized string length over total length of text
+  vector<string> temp = ""; //this vector temporary holds a sentence that both texts contain, we flag it as suspicious and record its length.
+  double plagPercent = 0.0; //plagiarized string length over total length of text
 
   for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){ //for loop that parses through file 1, AKA the smaller file
     for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){ //for loop that parses through file 2 for instance of i
