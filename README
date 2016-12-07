@@ -14,7 +14,13 @@ Contents:
 		test2.txt
 		test3.txt
 		test4.txt
+		file1.txt
+		file2.txt
+		file3.txt
+		getContentTest.txt
 	test_file_list.txt: contains only some test filenames
+	test2_file_list.txt: contains only some test filenames
+
 2. /include
 
 	catch.hpp: unit testing framework
@@ -22,12 +28,12 @@ Contents:
 	Managing.hpp: header file for class that sifts through files and compares pairs
 3. /src
 
-   CheckPlagiarism.cpp: Contains method definitions for functions to check the content of two files for plagiarism
-   Makefile: This compiles the project into the executable <finalProject>
-   unitTest-PlagiarismCheck.cpp: Contains unit tests
-   driver.cpp: creates a "Managing" object and passes all user input into it
-   Managing.cpp: receives user input and systematically compares files for plagiarism using CheckPlagiarism.cpp
-   unitTestDriver.cpp: driver for unit tests
+	CheckPlagiarism.cpp: Contains method definitions for functions to check the content of two files for plagiarism
+   	Makefile: This compiles the project into the executable <finalProject>
+   	unitTest-PlagiarismCheck.cpp: Contains unit tests
+   	driver.cpp: creates a "Managing" object and passes all user input into it
+   	Managing.cpp: receives user input and systematically compares files for plagiarism using CheckPlagiarism.cpp
+   	unitTestDriver.cpp: driver for unit tests
 
 4. gitlog.txt
 
@@ -48,9 +54,22 @@ The output will be a list of file pairs that our program deems suspicious. This 
 each file pair will be printed to the screen as it is being evaluated. The aforementioned suspicious pairs will be printed in one
 large list at the very end of the program. 
 
+************************************
+HOW IT WORKS:
+    Functions that check for plagiarism:
+    	- isSameFile:
+		The isSamefile function takes the begin and end iterators of two vectors that represent the text of two files and checks, word for word if both functions are exactly the same. This helps us eliminate some files rather quickly by looking at their length. Moreover in a more fully fleshed out version of this project, we could have flags that indicate the degree to which two files are suspicious, in which case this function would be even more helpfull.
+	- checNGram:
+		The CheckNgram Function takes the begin and end iterators of two vectors that represent the text of two files. It then starts a nested for loop that will first look at the first word in the first file and look if there exist any matches in the second file, if there are then the function will compare the word after the match in the first file and the word after the match in the second file. If there are more than three mismatches then the function will stop, tabulate the length of the mismatched sentence and then start again except the iterator for the first file will be reset to the last matched word. (for further explanation see comments).
+	- CheckControlC:
+	  	The CheckControlC function works very similarily to the checkNgram function, except it tabulates the levenshtein distance between words which basically counts the number of substitutions, deletions or additions one would have to do to go from one word to another. it then looks at the average distance per word, and if the average distance goes over a certain threshhold then the sentences will no longer be the same.
 
 
 ************************************
+TESTING:
+To run testing, just make and run ./unitTest. Our unit tests just verify that our individual functions work, it is by no mean absolutely extensive.
+
+***********************************
 OPTIMISATION:
 We commented out one of our methods when checking plagiarism that used the Levenshtein Distance algorithm to calculate the average distance
 between two sentences. This method looks at plagiarism in more depth as it compares two sentences more accurately then just looking at two sentences
@@ -60,6 +79,7 @@ complicated operations, however the suspicious files catcher will be more thorou
 
 APPROXIMATE RUNTIME:
 Our program runs through the small data set rather quickly, and runs faster on the 'h' setting.
+    sm_doc_set ~ 
 Obviously runtime increases as the data set size increases, but each file pair being inspected is printed to screen to show the progress of the code
 for the grader's convenience.
 --------------------------------------------------------------------------
