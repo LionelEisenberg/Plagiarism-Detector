@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 
   Managing m = Managing(masterfilePath, rigor);
   m.run();
-  m.printSuspiciousPairs();
+  vector<string> test = m.printSuspiciousPairs();
 
   return 0;
 }
