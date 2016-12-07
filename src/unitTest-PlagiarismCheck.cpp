@@ -80,3 +80,21 @@ TEST_CASE("run","[run]") {
   vector<string> low = l.printSuspiciousPairs();
   CHECK(low.empty() == true);
 }
+
+TEST_CASE("getMasterVector","[getMasterVector]"){
+  string masterPathFile = "../data/master_vector_test.txt";
+  Managing m = Managing(masterPathFile,'h');
+  vector<string> test = {"../data/test_doc_set/test1.txt",
+			 "../data/test_doc_set/test2.txt",
+			 "../data/test_doc_set/test3.txt",
+			 "../data/test_doc_set/test4.txt"};
+  CHECK(test == m.getMasterVector(masterPathFile));
+
+}
+
+TEST_CASE("getContent","[getContent]"){
+  vector<string> test = {"This","is", "a", "test", "file"};
+  string path = "../data/test_doc_set/getContentTest.txt";
+  Managing m = Managing(path,'h');
+  CHECK(test == m.getContent(path));
+}
