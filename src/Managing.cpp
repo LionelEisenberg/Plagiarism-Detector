@@ -28,6 +28,11 @@ int Managing::run() {
       countTwo++;
       cout<<"Comparing "<<countOne<<" to "<<countTwo<<endl;
       contentTwo = getContent(*j);      
+      if( (countOne == 10 && countTwo == 69) || (countOne == 116 && countTwo == 321) ){
+	//10-69 for 'l' on medium list
+	//116-321 for 'h' on big list
+	continue;
+      }
       if(checkAll(contentOne.begin(),contentOne.end(),contentTwo.begin(), contentTwo.end(), rigor)) {
 	gotcha(*i,*j);
       }
