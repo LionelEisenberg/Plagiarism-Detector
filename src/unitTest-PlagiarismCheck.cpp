@@ -30,21 +30,32 @@ TEST_CASE("levenshteinDistance","[levenshteinDistance]"){
 }
 
 TEST_CASE("getLength","[getLength]"){
-  
-
+  vector<string> one = {"this","is","a","test"};
+  CHECK(getLength(one.begin(),one.end()) == 4);
 }
 
 TEST_CASE("sameFile","[isSameFile]"){
-
-
+  vector<string> one = {"this","is","a","test"};
+  vector<string> two = {"this","is","a","test"};
+  vector<string> three = {"very","different","collection","of","strings"};
+  CHECK(isSameFile(one.begin(),one.end(),two.begin(),two.end()) == true);
+  CHECK(isSameFile(one.begin(),one.end(),three.begin(),three.end()) == false);
 }
 
 TEST_CASE("control-c","[checkControlC]"){
-
+  vector<string> one = {"this","is","a","test"};
+  vector<string> two = {"this","is","a","taste"};
+  vector<string> three = {"very","different","collection","of","strings"};
+  CHECK(checkControlC(one.begin(),one.end(),two.begin(),two.end(),'h') == true);
+  CHECK(checkControlC(one.begin(),one.end(),three.begin(),three.end(),'h') == false);
+  
 }
 
 TEST_CASE("checkNgram","[checkNgram]"){
-
-
+  vector<string> one = {"this","is","a","word","test","string"};
+  vector<string> two = {"this","is","a","dinosaurs","test","string"};
+  vector<string> three = {"very","different","collection","of","strings"};
+  CHECK(checkControlC(one.begin(),one.end(),two.begin(),two.end(),'h') == true);
+  CHECK(checkControlC(one.begin(),one.end(),three.begin(),three.end(),'h') == false);
 }
 
