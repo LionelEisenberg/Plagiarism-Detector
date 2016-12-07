@@ -1,4 +1,62 @@
 Final project for Intermediate Programming 600.120 (1) in Fall 2016.
 
-Sanat Deshpande
-Lionel Eisenberg
+Sanat Deshpande (sdeshpa4)
+Lionel Eisenberg (leisenb5)
+------------------------------------------------------------------------
+
+Contents:
+1. /data
+
+	empty_list.txt: test case for empty file list
+	master_vector_test.txt: contains a list of 4 text files
+	/test_doc_set: contains text files for testing purposes
+		test1.txt
+		test2.txt
+		test3.txt
+		test4.txt
+	test_file_list.txt: contains only some test filenames
+2. /include
+
+	catch.hpp: unit testing framework
+	CheckPlagiarism.hpp: header file for class containing methods to compare two files for plagiarism
+	Managing.hpp: header file for class that sifts through files and compares pairs
+3. /src
+   CheckPlagiarism.cpp: Contains method definitions for functions to check the content of two files for plagiarism
+   Makefile: This compiles the project into the executable <finalProject>
+   unitTest-PlagiarismCheck.cpp: Contains unit tests
+   driver.cpp: creates a "Managing" object and passes all user input into it
+   Managing.cpp: receives user input and systematically compares files for plagiarism using CheckPlagiarism.cpp
+   unitTestDriver.cpp: driver for unit tests
+
+------------------------------------------------------------------------
+
+What our code does, and how to run it:
+
+Running the command "make" will yield an executable called "finalProject".
+Our program takes two command line arguments:
+    1. filePath of text file containing list of test documents
+    2. 'l', 'm', or 'h' (low, medium, or high rigor in testing for plagiarism).
+If the second argument is not included, then it is assumed to be 'm'
+Example:
+	./finalProject ~cs120/public_data/sm_doc_list.txt h
+This means that the files listed in sm_doc_list.txt will be compared against each other with a high rigor for plagiarism.
+The output will be a list of file pairs that our program deems suspicious. This will be printed to screen. Additionally,
+each file pair will be printed to the screen as it is being evaluated. The aforementioned suspicious pairs will be printed in one
+large list at the very end of the program. 
+
+****WHAT OUR CODE DOES NOT DO*******
+There are some instance where our code fails unexpectedly. Only certain seemingly random pairs of files, under certain rigor conditions(h,m,l)
+will cause segmentation faults in the program. The unexpected nature comes in when we consider the fact that sometimes the same exact files run
+under the same conditions will execute without error. After attending office hours, there still seems to be no clear explanation of this behavior.
+For this reason, certain pairs of files are hardcoded to be skipped by our program (when run under the sometimes problematic conditons) in order
+for the code to complete execution and demonstrate that it is working fine otherwise. We implore you to comment out the hardcoded exceptions and run the
+code to see if you encounter these same errors, and to see if there is any salient explanation as to their nature.
+************************************
+
+APPROXIMATE RUNTIME:
+Our program runs through the small data set rather quickly, and runs faster on the 'h' setting.
+Obviously runtime increases as the data set size increases, but each file pair being inspected is printed to screen to show the progress of the code
+for the grader's convenience.
+--------------------------------------------------------------------------
+
+Project Feedback
