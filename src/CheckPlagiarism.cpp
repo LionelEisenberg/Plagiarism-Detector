@@ -19,13 +19,14 @@ bool checkAll(vector<string>::iterator oneBegin, vector<string>::iterator oneEnd
   swap(&oneBegin, &oneEnd, &twoBegin, &twoEnd); //swap vectors if vector one > vector two
   if(isSameFile(oneBegin, oneEnd, twoBegin, twoEnd)) { //checks if both vectors are literally the same
     return true;
+    }
+  else if (checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor)){
+    return true; //Gets an Ngram comparison of vectors
   }
-  else {
-    return checkNgram(oneBegin, oneEnd, twoBegin, twoEnd, rigor); //Gets an Ngram comparison of vectors
-  }
-  /*else { //This is a function that checks plagiarism a bit more thoroughly however it was very time intensive on our machines so we decided not to include this test. however please feel free to uncomment this and try it out.
+   /*else { //This is a function that checks plagiarism a bit more thoroughly however it was very time intensive on our machines so we decided not to include this test. however please feel free to uncomment this and try it out.
     return checkControlC(oneBegin, oneEnd, twoBegin, twoEnd, rigor);  
     }*/
+  return false;
 }
 
 //Levenshtein Distance Algorithm gives us the number of operations we need to do to a string to get another string. These include substitution, deletion and addition. We basically get a "distance" from one word to another.
@@ -51,6 +52,8 @@ void swap(vector<string>::iterator *oneBegin, vector<string>::iterator *oneEnd,v
     *oneBegin = *twoBegin;
     *twoBegin = temp;
 
+    cout<<"SWAPPED"<<endl;
+    
     temp = *oneEnd;
     *oneEnd = *twoEnd;
     *twoEnd = temp;
@@ -66,14 +69,15 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
   double plagPercent = 0.0; //plagiarized string length over total length of text
 
   for(vector<string>::iterator i = oneBegin; i != oneEnd; i++){ //for loop that parses through file 1, AKA the smaller file
+    //cout << "enter first loop" << endl;
     for(vector<string>::iterator it = twoBegin; it != twoEnd; it++){ //for loop that parses through file 2 for instance of i
       exceptions = 0;
       temp.clear();     
-      if(*i == *it){ //if the i and it iterators are equal, or if a word in file 1 is equal to a word in file 2 then start comparison of teh words that preceed these.
+      if(*i == *it && (i)!=(oneEnd-1) && (it)!=(twoEnd-1)){ //if the i and it iterators are equal, or if a word in file 1 is equal to a word in file 2 then start comparison of teh words that preceed these.
 	temp.push_back(*i); //add i to vector of plagiarised strings;
 	vector<string>::iterator ite = i+1; //create iterators to go through the sentence, while keeping out i and it iterators at their respective places
 	vector<string>::iterator iter = it+1;
-	while(exceptions < 3 && ite != oneEnd) { //while the sentences are very similar or we have not reached the end of the file compare the next word in the file
+	while(exceptions < 3 && ite != oneEnd && iter != twoEnd) { //while the sentences are very similar or we have not reached the end of the file compare the next word in the file
 	  temp.push_back(*ite);
       	  if(*ite != *iter){
 	    exceptions++; //if two words do not match increment the exceptions counter
@@ -82,21 +86,31 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
 	  iter++;
 	}
 	if(temp.size() < 5) { //if the detected plagiarised sentence is smaller than 5 then do not count said sentence as suspicious.
+	  //cout << *i << endl;
+	  //cout << *(iter-1) <<endl;
 	  continue;
 	}
 
-	else{ 
-	  if(*(ite-1) != *(iter-1)) { //This if statement basically takes the last words out if they are the ones which caused our sentence to be flagged as no longer suspicious  
+	else{
+	  if(*( ite-1) != *(iter-1)) { //This if statement basically takes the last words out if they are the ones which caused our sentence to be flagged as no longer suspicious  
 	    temp.pop_back(); //gets rid of erroneous last word if the reason why we broke the build was because the avgDist was to big
-	    if(*(ite-2) != *(iter -2)) {
+	    ite--;
+	    iter--;
+	    if(*(ite-1) != *(iter -1)) {
 	      temp.pop_back();
-	      if(*(ite-3) != *(iter -3)) {
+	      ite--;
+	      iter--;
+	      if(*(ite-1) != *(iter -1)) {
 		temp.pop_back();
+		ite--;
+		iter--;
+	      }
 	      }
 	    }
-	  }
 	  totalPlagLength += temp.size(); 
 	  i = ite-1;
+	  //	  cout << *ite << endl;
+	  //cout << *iter <<endl;
 	  break;
 	}
       }
@@ -160,6 +174,7 @@ bool checkControlC(vector<string>::iterator oneBegin, vector<string>::iterator o
 
 	else{
 	  if(dist > 3) { //if the last words were very different and were the reason we broke out of the build then pop it from the vector
+	    ite--;
 	    temp.pop_back();
 	  }
 	  totalPlagLength += temp.size(); //update totalPlageLength
