@@ -86,15 +86,13 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
 	  iter++;
 	}
 	if(temp.size() < 5) { //if the detected plagiarised sentence is smaller than 5 then do not count said sentence as suspicious.
-	  //cout << *i << endl;
-	  //cout << *(iter-1) <<endl;
 	  continue;
 	}
 
 	else{
 	  if(*( ite-1) != *(iter-1)) { //This if statement basically takes the last words out if they are the ones which caused our sentence to be flagged as no longer suspicious  
 	    temp.pop_back(); //gets rid of erroneous last word if the reason why we broke the build was because the avgDist was to big
-	    ite--;
+	    ite--;           //subsequent calls get rid of last total of 3 words if the last 3 were erroneous
 	    iter--;
 	    if(*(ite-1) != *(iter -1)) {
 	      temp.pop_back();
@@ -105,12 +103,10 @@ bool checkNgram(vector<string>::iterator oneBegin, vector<string>::iterator oneE
 		ite--;
 		iter--;
 	      }
-	      }
 	    }
+	  }
 	  totalPlagLength += temp.size(); 
 	  i = ite-1;
-	  //	  cout << *ite << endl;
-	  //cout << *iter <<endl;
 	  break;
 	}
       }
